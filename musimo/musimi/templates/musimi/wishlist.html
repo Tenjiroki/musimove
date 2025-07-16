@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ваш Вішліст</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="main">
+    <div class="container">
+      <h1 class="main-head">Ваш Вішліст</h1>
+
+      {% if wishlist_items %}
+      <ul class="list">
+        {% for item in wishlist_items %}
+        <li class="list-item">
+          <strong>{{ item.instrument.name }}</strong>
+          ({{ item.instrument.category }}) —
+          {{ item.instrument.brand|default:"Невідомий бренд" }}<br />
+          <em>Коментар:</em> {{ item.comment }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="no-data">Ваш вішліст порожній.</p>
+      {% endif %}
+
+      <a href="{% url 'homepage' %}" class="button">Назад</a>
+    </div>
+  </main>
+</body>
+</html>

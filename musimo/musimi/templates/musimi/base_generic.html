@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Musimove</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header class="nav">
+        <div class="container nav_lay">
+            <a href="/" class="nav-head">
+                <img src="{% static 'pics/logo.png' %}" alt="Лого" class="nav_pic">
+                <span>Musimove</span>
+            </a>
+            <nav>
+                <ul style="display: flex; list-style: none; gap: 1rem; margin: 0; padding: 0;">
+                    <li>
+                        <a href="{% url 'login' %}" class="button">
+                            Увійти
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}" class="button">
+                            Реєстрація
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Musimove</h1>
+            <div class="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <h2 class="foot_head">Musimove</h2>
+            <p class="foot_txt">&copy; 2024 Платформа продажу музичних інструментів</p>
+        </div>
+    </footer>
+
+</body>
+</html>

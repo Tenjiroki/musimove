@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Пропозиція створена</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main class="main">
+    <div class="container">
+      <h2 class="main-head">Пропозицію створено!</h2>
+      <p class="card_txt_parag">Ваша пропозиція успішно додана до бази даних.</p>
+      <a href="{% url 'create_offer' %}" class="button">Створити ще одну</a>
+      <a href="{% url 'offers' %}" class="button">← Назад до оферів</a>
+    </div>
+  </main>
+
+</body>
+</html>

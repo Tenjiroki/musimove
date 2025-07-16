@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Вхід до системи</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="formgroup">
+                    <label for="username" class="formgroup_lable">Логін:</label>
+                    <input type="text" id="username" name="username" required class="formgroup_input">
+                </div>
+
+                <div class="formgroup">
+                    <label for="password" class="formgroup_lable">Пароль:</label>
+                    <input type="password" id="password" name="password" required class="formgroup_input">
+                </div>
+
+                <div class="form_submit">
+                    <button type="submit" class="button">
+                        Увійти
+                    </button>
+                </div>
+            </form>
+
+            <div class="form-links">
+                <p style="color: #ECE9E4;">
+                    Немає акаунту?
+                    <a href="{% url 'register' %}" class="button" style="margin-left: 0.5rem;">Зареєструватися</a>
+                </p>
+            </div>
+
+            {% if messages %}
+                <ul style="list-style: none; padding: 1rem; background-color: #C9635A; color: #ECE9E4; border-radius: 0.5rem;">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+        </div>
+    </main>
+
+</body>
+</html>

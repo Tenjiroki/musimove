@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доставка замовлення #{{ order.id }}</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Доставка замовлення #{{ order.id }}</h1>
+
+            <div class="card_txt_parag">
+                {% if delivery %}
+                    <p><strong>Статус доставки:</strong> {{ delivery.status }}</p>
+                    <p><strong>Дата доставки:</strong> {{ delivery.delivery_date|date:"d M Y H:i" }}</p>
+                {% else %}
+                    <p>Доставка ще не оброблена.</p>
+                {% endif %}
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="{% url 'user_orders' %}" class="button">← Назад до замовлень</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

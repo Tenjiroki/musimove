@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категорія: {{ category.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Категорія: {{ category.name }}</h1>
+
+            <ul style="padding-left: 1rem;">
+                {% for instrument in instruments %}
+                    <li class="card_txt_parag">{{ instrument.name }} — ${{ instrument.price }}</li>
+                {% empty %}
+                    <li class="card_txt_parag">У цій категорії ще немає інструментів.</li>
+                {% endfor %}
+            </ul>
+
+            <div style="margin-top: 2rem;">
+                {% if instrument_id %}
+                    <a href="{% url 'instrument_detail' instrument_id %}" class="button">← Назад до інструменту</a>
+                {% else %}
+                    <a href="{% url 'offers' %}" class="button">← Назад до оферів</a>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

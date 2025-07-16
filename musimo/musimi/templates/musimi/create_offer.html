@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створення Офера</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Створення нового офера</h1>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="formgroup">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="form_submit">
+                    <button type="submit" class="button">
+                        <img src="{% static 'pics/add.svg' %}" alt="" class="button_pic">
+                        Створити пропозицію
+                    </button>
+                </div>
+            </form>
+
+            <div style="margin-top: 2rem;">
+                <a href="{% url 'offers' %}" class="button">← Назад до оферів</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

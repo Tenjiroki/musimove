@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ваші замовлення</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="main">
+    <div class="container">
+      <h1 class="main-head">Ваші замовлення</h1>
+
+      {% if orders %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID Замовлення</th>
+            <th>Покупець</th>
+            <th>Продавець</th>
+            <th>Статус</th>
+            <th>Ціна</th>
+            <th>Дата замовлення</th>
+            <th>Доставка</th>
+            <th>Відгук</th>
+            <th>Оплата</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.buyer.username }}</td>
+            <td>{{ order.seller.username }}</td>
+            <td>{{ order.status }}</td>
+            <td><strong class="price">{{ order.offer.price }} грн</strong></td>
+            <td>{{ order.order_date }}</td>
+            <td><a href="{% url 'delivery_detail' order.id %}" class="btn btn-delivery">Доставка</a></td>
+            <td><a href="{% url 'review_detail' order.id %}" class="btn btn-review">Відгук</a></td>
+            <td><a href="{% url 'payment_detail' order.id %}" class="btn btn-payment">Оплата</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="no-data">У вас немає замовлень.</p>
+      {% endif %}
+
+      <a href="{% url 'homepage' %}" class="back-link">← Назад</a>
+    </div>
+  </main>
+</body>
+</html>

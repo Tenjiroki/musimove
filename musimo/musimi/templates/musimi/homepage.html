@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Musimove - Головна</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main class="main">
+    <div class="container">
+      <h1 class="main-head">Вітаємо у Musimove!</h1>
+
+      <section class="user-data">
+        <h2 class="card_head">Доступ до ваших даних</h2>
+        <ul class="user-links">
+          <li><a href="{% url 'user_orders' %}" class="button">Ваші замовлення</a></li>
+          <li><a href="{% url 'offers' %}" class="button">Ваші офери</a></li>
+          <li><a href="{% url 'user_wishlist' %}" class="button">Ваш вішліст</a></li>
+          <li><a href="{% url 'user_notifications' %}" class="button">Сповіщення</a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="foot_txt">&copy; 2024 Musimove — Музична платформа</p>
+  </footer>
+
+</body>
+</html>

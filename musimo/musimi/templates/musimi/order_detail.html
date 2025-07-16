@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Інформація про оплату для Замовлення #{{ order.id }}</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main class="main">
+    <div class="container">
+      <h1 class="main-head">Інформація про оплату для Замовлення #{{ order.id }}</h1>
+
+      {% if payment %}
+        <p class="card_txt_parag"><strong>Тип оплати:</strong> {{ payment.payment_type }}</p>
+        <p class="card_txt_parag"><strong>Сума:</strong> ${{ payment.amount }}</p>
+        <p class="card_txt_parag"><strong>Дата оплати:</strong> {{ payment.payment_date|date:"d M Y H:i" }}</p>
+      {% else %}
+        <p class="card_txt_parag">Оплата для цього замовлення ще не оброблена.</p>
+      {% endif %}
+
+      <a href="{% url 'user_orders' %}" class="button">← Назад до списку замовлень</a>
+    </div>
+  </main>
+</body>
+</html>

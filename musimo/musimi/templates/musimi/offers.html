@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Офери на продаж</title>
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <main class="main">
+    <div class="container">
+      <h1 class="main-head">Офери на продаж</h1>
+
+      <section class="offers-list">
+        {% for offer in offers %}
+          <div class="card">
+            <div class="card_txt-container">
+              <h3 class="card_head">Офер №{{ offer.id }}: {{ offer.instrument.name }} — {{ offer.price }} $</h3>
+              <p class="card_txt_parag"><strong>Статус:</strong> {{ offer.status }}</p>
+              <a href="{% url 'instrument_detail' instrument_id=offer.instrument.id %}" class="button">Деталі</a>
+
+              {% if offer.status == 'available' %}
+                <form action="{% url 'book_offer' offer.id %}" method="post" style="margin-top: 1rem;">
+                  {% csrf_token %}
+                  <button type="submit" class="button">Забронювати</button>
+                </form>
+              {% elif offer.status == 'booked' %}
+                <p class="card_txt_parag">Офера заброньована.</p>
+              {% elif offer.status == 'sold' %}
+                <p class="card_txt_parag">Офера продана.</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+
+      <div class="form_submit">
+        <a href="{% url 'homepage' %}" class="button">← Назад</a>
+        <a href="{% url 'create_offer' %}" class="button">Створити офер</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>

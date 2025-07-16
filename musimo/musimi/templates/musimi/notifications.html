@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендовані інструменти</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Рекомендовані інструменти</h1>
+
+            {% if recommended_instruments %}
+                <ul>
+                    {% for instrument in recommended_instruments %}
+                        <li class="card_txt_parag">
+                            <strong>{{ instrument.name }}</strong> ({{ instrument.category }}) — {{ instrument.price }} грн<br>
+                            <small>Бренд: {{ instrument.brand|default:"Невідомий бренд" }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="card_txt_parag">Немає рекомендованих інструментів.</p>
+            {% endif %}
+
+            <div style="margin-top: 2rem;">
+                <a href="{% url 'homepage' %}" class="button">← Назад</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

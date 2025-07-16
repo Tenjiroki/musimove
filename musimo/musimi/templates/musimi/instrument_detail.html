@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ instrument.name }} - Деталі інструменту</title>
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Manrope:wght@400;700&family=Literata:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="main">
+        <div class="container">
+            <h1 class="main-head">Інструмент: {{ instrument.name }}</h1>
+            <div class="card_txt_parag">
+                <p><strong>Код:</strong> {{ instrument.code }}</p>
+                <p><strong>Опис:</strong> {{ instrument.description }}</p>
+                <p><strong>Кількість на складі:</strong> {{ instrument.stock }}</p>
+                <p><strong>Бренд:</strong> 
+                    <a href="{% url 'brand_detail' instrument.brand.id %}" class="button">{{ instrument.brand.name }}</a>
+                </p>
+                <p><strong>Категорія:</strong> 
+                    <a href="{% url 'category_detail' instrument.category.id %}" class="button">{{ instrument.category.name }}</a>
+                </p>
+            </div>
+
+            <h2 class="card_head">Пропозиції:</h2>
+            {% if instrument.offer_set.all %}
+                {% for offer in instrument.offer_set.all %}
+                    <div class="card_txt_parag">
+                        <p class="card_txt-time">Ціна: {{ offer.price }} $</p>
+                        <p>Продавець: {{ offer.seller.username }}</p>
+                        <hr>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="card_txt_parag">Немає доступних оферів</p>
+            {% endif %}
+
+            <div style="margin-top: 2rem;">
+                <a href="{% url 'offers' %}" class="button">← Назад до оферів</a>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
