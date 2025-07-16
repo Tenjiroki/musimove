@@ -5,10 +5,11 @@ from .models import Offer
 
 
 class RegisterForm(forms.ModelForm):
-    confirm_password = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
+    password = forms.CharField(widget=forms.PasswordInput, label="Пароль")
+    confirm_password = forms.CharField(widget=forms.PasswordInput, label="Підтвердіть пароль")
 
     class Meta:
-        model = User  
+        model = User
         fields = ['username', 'email', 'password']
 
     def clean(self):
@@ -16,10 +17,16 @@ class RegisterForm(forms.ModelForm):
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 
-        
         if password != confirm_password:
-            raise forms.ValidationError("Passwords do not match.")
+            raise forms.ValidationError("Паролі не збігаються.")
         return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
     
 
     
